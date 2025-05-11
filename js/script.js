@@ -17,7 +17,6 @@ let currSlide = 0;
 slides.forEach((_, i) => dotsContainer.insertAdjacentHTML("beforeend", `<div class="dot" data-slide="${i}"></div>`));
 const dots = document.querySelectorAll(".dot");
 toSlide();
-console.log(dots);
 
 function handler(el) {
   try {
@@ -83,7 +82,7 @@ try {
     }
   })
 } catch (err) {
-  console.log(err);
+  console.log();
 }
 
 if (width < 767) {
@@ -105,13 +104,17 @@ try {
     }
   });
 } catch (err) {
-  console.log(err);
+  console.log();
 }
 
 try {
   setTimeout(() => {
-    modal.classList.add("modal_active");
-    doc.classList.add("document_active");
+    try {
+      modal.classList.add("modal_active");
+      doc.classList.add("document_active");
+    } catch (err) {
+      console.log();
+    }
   }, 5_000);
   ok.addEventListener("click", () => {
     modal.classList.remove("modal_active");
@@ -123,7 +126,6 @@ try {
 
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
-    console.log(entry);
     if (entry.isIntersecting) {
       entry.target.classList.remove("hidden");
     }
